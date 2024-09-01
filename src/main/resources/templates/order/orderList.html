@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header"/>
+<head th:replace="~{fragments/header :: header}"/>
 <body>
 <div class="container">
-    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div th:replace="~{fragments/bodyHeader :: bodyHeader}"/>
     <div>
         <div>
             <form th:object="${orderSearch}" class="form-inline">
@@ -38,7 +38,7 @@
             <tbody>
             <tr th:each="item : ${orders}">
                 <td th:text="${item.id}"></td>
-                <td th:text="${item.member.name}"></td>
+                <td th:text="${item.member.username}"></td>
                 <td th:text="${item.orderItems[0].item.name}"></td>
                 <td th:text="${item.orderItems[0].orderPrice}"></td>
                 <td th:text="${item.orderItems[0].count}"></td>
@@ -53,7 +53,7 @@
             </tbody>
         </table>
     </div>
-    <div th:replace="fragments/footer :: footer"/>
+    <div th:replace="~{fragments/footer :: footer}"/>
 </div> <!-- /container -->
 </body>
 <script>

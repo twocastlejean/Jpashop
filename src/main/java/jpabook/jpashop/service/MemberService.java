@@ -9,13 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
     //회원 가입
+    @Transactional
     public Long join(Member member) {
         validateDuplicateMember(member);
         memberRepository.saveMember(member);
@@ -36,5 +37,11 @@ public class MemberService {
         if (!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
+    }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member findMember = memberRepository.findMemberById(id);
+        findMember.setUsername(name);
     }
 }
